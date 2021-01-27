@@ -1,7 +1,11 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { UserInputError } from "apollo-server-express";
+import { AuthenticationError, UserInputError } from "apollo-server-express";
 import { MutationResolvers } from "../generated/graphql";
-import { generatePasswordHash } from "../utils/author";
+import {
+  comparePassword,
+  generatePasswordHash,
+  generateJWT,
+} from "../utils/author";
 
 const Mutation: MutationResolvers = {
   async createAuthor(_parent, { data }, { prisma }, _info) {
@@ -24,6 +28,17 @@ const Mutation: MutationResolvers = {
       }
       throw err;
     }
+  },
+  async login(_parent, { data }, { prisma }, _info) {
+    const { email, password } = data;
+    const author = await prisma.author.findFirst({ where: { email } });
+    if (!author) throw new AuthenticationError("Invalid username/password");
+    const passwordMatch = await comparePassword(password, author.password);
+    if (passwordMatch) {
+      const token = await generateJWT({ email });
+      return token;
+    }
+    throw new AuthenticationError("Invalid username/password");
   },
 };
 

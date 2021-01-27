@@ -4,10 +4,16 @@ type Query {
 
 type Mutation {
   createAuthor(data: CreateAuthorInput!): Author!
+  login(data: LoginInput!): String!
 }
 
 input CreateAuthorInput {
   name: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }

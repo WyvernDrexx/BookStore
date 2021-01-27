@@ -23,6 +23,7 @@ export type Query = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAuthor: Author;
+  login: Scalars['String'];
 };
 
 
@@ -30,8 +31,18 @@ export type MutationCreateAuthorArgs = {
   data: CreateAuthorInput;
 };
 
+
+export type MutationLoginArgs = {
+  data: LoginInput;
+};
+
 export type CreateAuthorInput = {
   name: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
@@ -145,8 +156,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
-  CreateAuthorInput: CreateAuthorInput;
   String: ResolverTypeWrapper<Scalars['String']>;
+  CreateAuthorInput: CreateAuthorInput;
+  LoginInput: LoginInput;
   Book: ResolverTypeWrapper<Book>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -159,8 +171,9 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
   Mutation: {};
-  CreateAuthorInput: CreateAuthorInput;
   String: Scalars['String'];
+  CreateAuthorInput: CreateAuthorInput;
+  LoginInput: LoginInput;
   Book: Book;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -175,6 +188,7 @@ export type QueryResolvers<ContextType = MyContextType, ParentType extends Resol
 
 export type MutationResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAuthor?: Resolver<ResolversTypes['Author'], ParentType, ContextType, RequireFields<MutationCreateAuthorArgs, 'data'>>;
+  login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
 }>;
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
