@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
-const context = async ({ req }) => {
+const context = ({ req }) => {
   // let token = req.headers.authorization?.split(" ")[1];
   return { prisma };
 };

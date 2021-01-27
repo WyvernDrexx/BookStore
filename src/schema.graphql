@@ -1,8 +1,28 @@
-type Query{
-  books: [Book]!
+type Query {
+  books: [Book]
 }
 
-type Book{
-  name: String
-  author: String
+type Book {
+  id: ID!
+  name: String!
+  price: Int!
+  author: Author!
+  totalPages: Int!
+  publishedDate: String!
+  reviews: [Review]
+}
+
+type Author {
+  id: ID!
+  name: String!
+  books: [Book]
+  reviews: [Review]
+}
+
+type Review {
+  id: ID!
+  text: String!
+  author: Author!
+  book: Book!
+  publishedDate: String!
 }

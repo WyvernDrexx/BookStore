@@ -1,11 +1,8 @@
 import { Resolvers } from "../generated/graphql";
+import Query from "./Query";
 
 const resolvers: Resolvers = {
-  Query: {
-    books: () => {
-      return [{ name: "Test", author: "LP Sharma" }];
-    },
-  },
+  Query
 };
 
 export default resolvers;
