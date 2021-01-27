@@ -1,5 +1,15 @@
 type Query {
-  books: [Book]
+  books: [Book]!
+}
+
+type Mutation {
+  createAuthor(data: CreateAuthorInput!): Author!
+}
+
+input CreateAuthorInput {
+  name: String!
+  email: String!
+  password: String!
 }
 
 type Book {

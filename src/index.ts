@@ -17,6 +17,16 @@ const context = ({ req }) => {
 const apolloServer = new ApolloServer({
   schema,
   context,
+  formatError(err) {
+    console.log(err);
+    if (err.extensions.code === "INTERNAL_SERVER_ERROR") {
+      return {
+        message: "Unable to process your request",
+        code: "SERVER_ERROR",
+      };
+    }
+    return { message: err.message, code: err.extensions.code };
+  },
 });
 
 apolloServer.applyMiddleware({ app });

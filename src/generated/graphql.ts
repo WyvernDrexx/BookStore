@@ -5,6 +5,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,7 +17,23 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  books?: Maybe<Array<Maybe<Book>>>;
+  books: Array<Maybe<Book>>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createAuthor: Author;
+};
+
+
+export type MutationCreateAuthorArgs = {
+  data: CreateAuthorInput;
+};
+
+export type CreateAuthorInput = {
+  name: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Book = {
@@ -127,9 +144,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
+  Mutation: ResolverTypeWrapper<{}>;
+  CreateAuthorInput: CreateAuthorInput;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Book: ResolverTypeWrapper<Book>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Author: ResolverTypeWrapper<Author>;
   Review: ResolverTypeWrapper<Review>;
@@ -139,9 +158,11 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {};
+  Mutation: {};
+  CreateAuthorInput: CreateAuthorInput;
+  String: Scalars['String'];
   Book: Book;
   ID: Scalars['ID'];
-  String: Scalars['String'];
   Int: Scalars['Int'];
   Author: Author;
   Review: Review;
@@ -149,7 +170,11 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type QueryResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
+  books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createAuthor?: Resolver<ResolversTypes['Author'], ParentType, ContextType, RequireFields<MutationCreateAuthorArgs, 'data'>>;
 }>;
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
@@ -182,6 +207,7 @@ export type ReviewResolvers<ContextType = MyContextType, ParentType extends Reso
 
 export type Resolvers<ContextType = MyContextType> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Book?: BookResolvers<ContextType>;
   Author?: AuthorResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
