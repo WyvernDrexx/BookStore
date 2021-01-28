@@ -61,6 +61,37 @@ const Mutation: MutationResolvers = {
     });
     return book;
   },
+  async createReview(_parent, { data }, { prisma, user }, _info) {
+    const { text, bookId } = data;
+    if (!user.isAuthenticated)
+      throw new AuthenticationError("Please login to continue.");
+    const book = await prisma.book.findFirst({
+      where: {
+        id: bookId,
+      },
+    });
+    if (!book) throw new UserInputError("Sorry, book doesn't exist.");
+    const review = await prisma.review.create({
+      data: {
+        text,
+        author: {
+          connect: {
+            email: user.payload.email,
+          },
+        },
+        book: {
+          connect: {
+            id: bookId,
+          },
+        },
+      },
+      include: {
+        author: true,
+        book: true,
+      },
+    });
+    return review;
+  },
 };
 
 export default Mutation;

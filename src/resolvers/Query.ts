@@ -5,7 +5,16 @@ const Query: QueryResolvers = {
     return await prisma.book.findMany({
       include: {
         author: true,
-        reviews: true,
+        reviews: {
+          include: {
+            author: {
+              include: {
+                books: true,
+                reviews: true,
+              },
+            },
+          },
+        },
       },
     });
   },

@@ -27,6 +27,7 @@ export type Mutation = {
   createAuthor: Author;
   login: Scalars['String'];
   createBook: Book;
+  createReview: Review;
 };
 
 
@@ -44,6 +45,11 @@ export type MutationCreateBookArgs = {
   data: CreateBookInput;
 };
 
+
+export type MutationCreateReviewArgs = {
+  data: CreateReviewInput;
+};
+
 export type CreateBookInput = {
   name: Scalars['String'];
   price: Scalars['Float'];
@@ -59,6 +65,11 @@ export type CreateAuthorInput = {
 export type LoginInput = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type CreateReviewInput = {
+  text: Scalars['String'];
+  bookId: Scalars['String'];
 };
 
 export type Book = {
@@ -177,6 +188,7 @@ export type ResolversTypes = ResolversObject<{
   Int: ResolverTypeWrapper<Scalars['Int']>;
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
+  CreateReviewInput: CreateReviewInput;
   Book: ResolverTypeWrapper<Book>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Author: ResolverTypeWrapper<Author>;
@@ -195,6 +207,7 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars['Int'];
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
+  CreateReviewInput: CreateReviewInput;
   Book: Book;
   ID: Scalars['ID'];
   Author: Author;
@@ -214,6 +227,7 @@ export type MutationResolvers<ContextType = MyContextType, ParentType extends Re
   createAuthor?: Resolver<ResolversTypes['Author'], ParentType, ContextType, RequireFields<MutationCreateAuthorArgs, 'data'>>;
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
   createBook?: Resolver<ResolversTypes['Book'], ParentType, ContextType, RequireFields<MutationCreateBookArgs, 'data'>>;
+  createReview?: Resolver<ResolversTypes['Review'], ParentType, ContextType, RequireFields<MutationCreateReviewArgs, 'data'>>;
 }>;
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{

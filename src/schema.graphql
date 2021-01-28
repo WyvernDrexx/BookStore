@@ -8,6 +8,7 @@ type Mutation {
   createAuthor(data: CreateAuthorInput!): Author!
   login(data: LoginInput!): String!
   createBook(data: CreateBookInput!): Book!
+  createReview(data: CreateReviewInput!): Review!
 }
 
 input CreateBookInput {
@@ -25,6 +26,11 @@ input CreateAuthorInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateReviewInput{
+  text: String!
+  bookId: String!
 }
 
 type Book {
