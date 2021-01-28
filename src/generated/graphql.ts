@@ -17,7 +17,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  books: Array<Maybe<Book>>;
+  books?: Maybe<Array<Maybe<Book>>>;
 };
 
 export type Mutation = {
@@ -183,7 +183,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type QueryResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
+  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
 }>;
 
 export type MutationResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{

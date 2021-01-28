@@ -3,15 +3,17 @@ import dotenv from "dotenv";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { schema } from "./schema";
+import { getAuthPayload } from "./utils/author";
 
 dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
 
-const context = ({ req }) => {
-  // let token = req.headers.authorization?.split(" ")[1];
-  return { prisma };
+const context = async ({ req }) => {
+  let token = req.headers.authorization?.split(" ")[1];
+  const authPayload = await getAuthPayload(String(token));
+  return { prisma, authPayload };
 };
 
 const apolloServer = new ApolloServer({

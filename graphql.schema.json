@@ -18,16 +18,12 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Book",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Book",
+                "ofType": null
               }
             },
             "isDeprecated": false,

@@ -35,8 +35,7 @@ const Mutation: MutationResolvers = {
     if (!author) throw new AuthenticationError("Invalid username/password");
     const passwordMatch = await comparePassword(password, author.password);
     if (passwordMatch) {
-      const token = await generateJWT({ email });
-      return token;
+      return await generateJWT({ email, name: author.name });
     }
     throw new AuthenticationError("Invalid username/password");
   },
