@@ -36,7 +36,7 @@ export type AuthPayload = {
   isAuthenticated: boolean;
 };
 
-async function getAuthPayload(token: string): Promise<AuthPayload> {
+async function getUserData(token: string): Promise<AuthPayload> {
   return new Promise(function (resolve, reject) {
     try {
       const payload: JWTPayload = jwt.verify(
@@ -58,4 +58,4 @@ async function getAuthPayload(token: string): Promise<AuthPayload> {
   });
 }
 
-export { generatePasswordHash, comparePassword, generateJWT, getAuthPayload };
+export { generatePasswordHash, comparePassword, generateJWT, getUserData };

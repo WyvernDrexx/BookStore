@@ -39,9 +39,9 @@ const Mutation: MutationResolvers = {
     }
     throw new AuthenticationError("Invalid username/password");
   },
-  async createBook(_parent, { data }, { prisma, authPayload }, _info) {
+  async createBook(_parent, { data }, { prisma, user }, _info) {
     const { name, price, totalPages } = data;
-    if (!authPayload.isAuthenticated)
+    if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
     const book = await prisma.book.create({
       data: {
@@ -50,7 +50,7 @@ const Mutation: MutationResolvers = {
         totalPages,
         author: {
           connect: {
-            email: authPayload.payload.email,
+            email: user.payload.email,
           },
         },
       },
