@@ -10,6 +10,11 @@ generates:
     config:
       useIndexSignature: true
       contextType: ../resolvers/types/MyContextType#MyContextType
+      mapperTypeSuffix: Model
+      mappers:
+        Review: "@prisma/client/index.d#Review"
+        Author: "@prisma/client/index.d#Author"
+        Book: "@prisma/client/index.d#Book"
   ./graphql.schema.json:
     plugins:
       - "introspection"

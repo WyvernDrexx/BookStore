@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { Review as ReviewModel, Author as AuthorModel, Book as BookModel } from '@prisma/client/index.d';
 import { MyContextType } from '../resolvers/types/MyContextType';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
@@ -189,10 +190,10 @@ export type ResolversTypes = ResolversObject<{
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
   CreateReviewInput: CreateReviewInput;
-  Book: ResolverTypeWrapper<Book>;
+  Book: ResolverTypeWrapper<BookModel>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  Author: ResolverTypeWrapper<Author>;
-  Review: ResolverTypeWrapper<Review>;
+  Author: ResolverTypeWrapper<AuthorModel>;
+  Review: ResolverTypeWrapper<ReviewModel>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
@@ -208,10 +209,10 @@ export type ResolversParentTypes = ResolversObject<{
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
   CreateReviewInput: CreateReviewInput;
-  Book: Book;
+  Book: BookModel;
   ID: Scalars['ID'];
-  Author: Author;
-  Review: Review;
+  Author: AuthorModel;
+  Review: ReviewModel;
   Boolean: Scalars['Boolean'];
 }>;
 
