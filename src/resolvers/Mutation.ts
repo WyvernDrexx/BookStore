@@ -8,7 +8,7 @@ import {
 } from "../utils/author";
 
 const Mutation: MutationResolvers = {
-  async createAuthor(_parent, { data }, { prisma }, _info) {
+  async createAuthor(_, { data }, { prisma }, __) {
     const { name, email, password } = data;
     try {
       const hashedPassword = await generatePasswordHash(password);
@@ -29,7 +29,7 @@ const Mutation: MutationResolvers = {
       throw err;
     }
   },
-  async login(_parent, { data }, { prisma }, _info) {
+  async login(_, { data }, { prisma }, __) {
     const { email, password } = data;
     const author = await prisma.author.findFirst({ where: { email } });
     if (!author) throw new AuthenticationError("Invalid username/password");
@@ -39,7 +39,7 @@ const Mutation: MutationResolvers = {
     }
     throw new AuthenticationError("Invalid username/password");
   },
-  async createBook(_parent, { data }, { prisma, user }, _info) {
+  async createBook(_, { data }, { prisma, user }, __) {
     const { name, price, totalPages } = data;
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
@@ -61,7 +61,7 @@ const Mutation: MutationResolvers = {
     });
     return book;
   },
-  async createReview(_parent, { data }, { prisma, user }, _info) {
+  async createReview(_, { data }, { prisma, user }, __) {
     const { text, bookId } = data;
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");

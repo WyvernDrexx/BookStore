@@ -1,7 +1,7 @@
 import { BookResolvers } from "../generated/graphql";
 
 const Book: BookResolvers = {
-  async author(parent, _args, { prisma }, _info) {
+  async author(parent, _, { prisma }, __) {
     const author = await prisma.author.findFirst({
       where: {
         id: parent.authorId,
@@ -9,7 +9,7 @@ const Book: BookResolvers = {
     });
     return author;
   },
-  async reviews(parent, _args, { prisma }, _info) {
+  async reviews(parent, _, { prisma }, __) {
     const reviews = await prisma.review.findMany({
       where: {
         bookId: parent.id,
