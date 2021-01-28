@@ -26,6 +26,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createAuthor: Author;
   login: Scalars['String'];
+  createBook: Book;
 };
 
 
@@ -36,6 +37,17 @@ export type MutationCreateAuthorArgs = {
 
 export type MutationLoginArgs = {
   data: LoginInput;
+};
+
+
+export type MutationCreateBookArgs = {
+  data: CreateBookInput;
+};
+
+export type CreateBookInput = {
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  totalPages: Scalars['Int'];
 };
 
 export type CreateAuthorInput = {
@@ -53,7 +65,7 @@ export type Book = {
   __typename?: 'Book';
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['Float']>;
   author?: Maybe<Author>;
   totalPages?: Maybe<Scalars['Int']>;
   publishedDate?: Maybe<Scalars['DateTime']>;
@@ -74,7 +86,7 @@ export type Review = {
   text?: Maybe<Scalars['String']>;
   author?: Maybe<Author>;
   book?: Maybe<Book>;
-  publishedDate?: Maybe<Scalars['String']>;
+  publishedDate?: Maybe<Scalars['DateTime']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -160,11 +172,13 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  CreateBookInput: CreateBookInput;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
   Book: ResolverTypeWrapper<Book>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Author: ResolverTypeWrapper<Author>;
   Review: ResolverTypeWrapper<Review>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -176,11 +190,13 @@ export type ResolversParentTypes = ResolversObject<{
   Query: {};
   Mutation: {};
   String: Scalars['String'];
+  CreateBookInput: CreateBookInput;
+  Float: Scalars['Float'];
+  Int: Scalars['Int'];
   CreateAuthorInput: CreateAuthorInput;
   LoginInput: LoginInput;
   Book: Book;
   ID: Scalars['ID'];
-  Int: Scalars['Int'];
   Author: Author;
   Review: Review;
   Boolean: Scalars['Boolean'];
@@ -197,12 +213,13 @@ export type QueryResolvers<ContextType = MyContextType, ParentType extends Resol
 export type MutationResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createAuthor?: Resolver<ResolversTypes['Author'], ParentType, ContextType, RequireFields<MutationCreateAuthorArgs, 'data'>>;
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
+  createBook?: Resolver<ResolversTypes['Book'], ParentType, ContextType, RequireFields<MutationCreateBookArgs, 'data'>>;
 }>;
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
   totalPages?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   publishedDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -223,7 +240,7 @@ export type ReviewResolvers<ContextType = MyContextType, ParentType extends Reso
   text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
   book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
-  publishedDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  publishedDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
