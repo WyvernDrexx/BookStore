@@ -2,13 +2,12 @@ import { ReviewResolvers } from "../generated/graphql";
 
 const Review: ReviewResolvers = {
   async author(parent, _args, { prisma }, _info) {
-    const author = await prisma.author.findFirst({
+    const { author } = await prisma.review.findFirst({
       where: {
-        reviews: {
-          some: {
-            id: parent.id,
-          },
-        },
+        id: parent.id,
+      },
+      include: {
+        author: true,
       },
     });
     return author;
