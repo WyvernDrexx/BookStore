@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { MyContextType } from '../resolvers/types/MyContextType';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
@@ -13,7 +13,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 };
+
 
 export type Query = {
   __typename?: 'Query';
@@ -50,18 +52,18 @@ export type LoginInput = {
 export type Book = {
   __typename?: 'Book';
   id: Scalars['ID'];
-  name: Scalars['String'];
-  price: Scalars['Int'];
-  author: Author;
-  totalPages: Scalars['Int'];
-  publishedDate: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['Int']>;
+  author?: Maybe<Author>;
+  totalPages?: Maybe<Scalars['Int']>;
+  publishedDate?: Maybe<Scalars['DateTime']>;
   reviews?: Maybe<Array<Maybe<Review>>>;
 };
 
 export type Author = {
   __typename?: 'Author';
   id: Scalars['ID'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   books?: Maybe<Array<Maybe<Book>>>;
   reviews?: Maybe<Array<Maybe<Review>>>;
 };
@@ -69,10 +71,10 @@ export type Author = {
 export type Review = {
   __typename?: 'Review';
   id: Scalars['ID'];
-  text: Scalars['String'];
-  author: Author;
-  book: Book;
-  publishedDate: Scalars['String'];
+  text?: Maybe<Scalars['String']>;
+  author?: Maybe<Author>;
+  book?: Maybe<Book>;
+  publishedDate?: Maybe<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -154,6 +156,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -169,6 +172,7 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  DateTime: Scalars['DateTime'];
   Query: {};
   Mutation: {};
   String: Scalars['String'];
@@ -182,6 +186,10 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
 }>;
 
+export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
+
 export type QueryResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
 }>;
@@ -193,18 +201,18 @@ export type MutationResolvers<ContextType = MyContextType, ParentType extends Re
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
-  totalPages?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  publishedDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
+  totalPages?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  publishedDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type AuthorResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -212,14 +220,15 @@ export type AuthorResolvers<ContextType = MyContextType, ParentType extends Reso
 
 export type ReviewResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
-  book?: Resolver<ResolversTypes['Book'], ParentType, ContextType>;
-  publishedDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
+  book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
+  publishedDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = MyContextType> = ResolversObject<{
+  DateTime?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Book?: BookResolvers<ContextType>;

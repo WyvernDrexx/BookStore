@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   books: [Book]
 }
@@ -20,25 +22,25 @@ input LoginInput {
 
 type Book {
   id: ID!
-  name: String!
-  price: Int!
-  author: Author!
-  totalPages: Int!
-  publishedDate: String!
+  name: String
+  price: Int
+  author: Author
+  totalPages: Int
+  publishedDate: DateTime
   reviews: [Review]
 }
 
 type Author {
   id: ID!
-  name: String!
+  name: String
   books: [Book]
   reviews: [Review]
 }
 
 type Review {
   id: ID!
-  text: String!
-  author: Author!
-  book: Book!
-  publishedDate: String!
+  text: String
+  author: Author
+  book: Book
+  publishedDate: String
 }

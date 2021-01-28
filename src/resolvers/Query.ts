@@ -1,8 +1,8 @@
 import { QueryResolvers } from "../generated/graphql";
 
 const Query: QueryResolvers = {
-  books: (_parent, _args, { prisma }, _info) => {
-    return null;
+  async books(_parent, _args, { prisma }, _info) {
+    return await prisma.book.findMany();
   },
 };
 
