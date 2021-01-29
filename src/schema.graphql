@@ -1,7 +1,7 @@
 scalar DateTime
 
 type Query {
-  books: [Book]
+  books: [Book]!
 }
 
 type Mutation {
@@ -35,25 +35,25 @@ input CreateReviewInput{
 
 type Book {
   id: ID!
-  name: String
-  price: Float
-  author: Author
-  totalPages: Int
-  publishedDate: DateTime
-  reviews: [Review]
+  name: String!
+  price: Float!
+  author: Author!
+  totalPages: Int!
+  publishedDate: DateTime!
+  reviews: [Review]!
 }
 
 type Author {
   id: ID!
-  name: String
-  books: [Book]
-  reviews: [Review]
+  name: String!
+  books: [Book]!
+  reviews: [Review]!
 }
 
 type Review {
   id: ID!
-  text: String
-  author: Author
-  book: Book
-  publishedDate: DateTime
+  text: String!
+  author: Author!
+  book: Book!
+  publishedDate: DateTime!
 }

@@ -20,7 +20,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  books?: Maybe<Array<Maybe<Book>>>;
+  books: Array<Maybe<Book>>;
 };
 
 export type Mutation = {
@@ -76,29 +76,29 @@ export type CreateReviewInput = {
 export type Book = {
   __typename?: 'Book';
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Float']>;
-  author?: Maybe<Author>;
-  totalPages?: Maybe<Scalars['Int']>;
-  publishedDate?: Maybe<Scalars['DateTime']>;
-  reviews?: Maybe<Array<Maybe<Review>>>;
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  author: Author;
+  totalPages: Scalars['Int'];
+  publishedDate: Scalars['DateTime'];
+  reviews: Array<Maybe<Review>>;
 };
 
 export type Author = {
   __typename?: 'Author';
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
-  books?: Maybe<Array<Maybe<Book>>>;
-  reviews?: Maybe<Array<Maybe<Review>>>;
+  name: Scalars['String'];
+  books: Array<Maybe<Book>>;
+  reviews: Array<Maybe<Review>>;
 };
 
 export type Review = {
   __typename?: 'Review';
   id: Scalars['ID'];
-  text?: Maybe<Scalars['String']>;
-  author?: Maybe<Author>;
-  book?: Maybe<Book>;
-  publishedDate?: Maybe<Scalars['DateTime']>;
+  text: Scalars['String'];
+  author: Author;
+  book: Book;
+  publishedDate: Scalars['DateTime'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -221,7 +221,7 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type QueryResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
+  books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
 }>;
 
 export type MutationResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
@@ -233,29 +233,29 @@ export type MutationResolvers<ContextType = MyContextType, ParentType extends Re
 
 export type BookResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
-  totalPages?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  publishedDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  totalPages?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  publishedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  reviews?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type AuthorResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
-  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
+  reviews?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ReviewResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  author?: Resolver<Maybe<ResolversTypes['Author']>, ParentType, ContextType>;
-  book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
-  publishedDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  book?: Resolver<ResolversTypes['Book'], ParentType, ContextType>;
+  publishedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
