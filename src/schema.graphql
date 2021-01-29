@@ -5,19 +5,19 @@ type Query {
 }
 
 type Mutation {
-  createAuthor(data: CreateAuthorInput!): Author!
   login(data: LoginInput!): String!
-  createBook(data: CreateBookInput!): Book!
-  createReview(data: CreateReviewInput!): Review!
+  createAuthor(data: AuthorCreateInput!): Author!
+  createBook(data: BookCreateInput!): Book!
+  createReview(data: ReviewCreateInput!): Review!
 }
 
-input CreateBookInput {
+input BookCreateInput {
   name: String!
   price: Float!
   totalPages: Int!
 }
 
-input CreateAuthorInput {
+input AuthorCreateInput {
   name: String!
   email: String!
   password: String!
@@ -28,7 +28,7 @@ input LoginInput {
   password: String!
 }
 
-input CreateReviewInput{
+input ReviewCreateInput{
   text: String!
   bookId: String!
 }

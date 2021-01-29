@@ -55,37 +55,6 @@
         "description": null,
         "fields": [
           {
-            "name": "createAuthor",
-            "description": null,
-            "args": [
-              {
-                "name": "data",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CreateAuthorInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Author",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "login",
             "description": null,
             "args": [
@@ -117,6 +86,37 @@
             "deprecationReason": null
           },
           {
+            "name": "createAuthor",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "AuthorCreateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Author",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createBook",
             "description": null,
             "args": [
@@ -128,7 +128,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CreateBookInput",
+                    "name": "BookCreateInput",
                     "ofType": null
                   }
                 },
@@ -159,7 +159,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CreateReviewInput",
+                    "name": "ReviewCreateInput",
                     "ofType": null
                   }
                 },
@@ -196,7 +196,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CreateBookInput",
+        "name": "BookCreateInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -269,7 +269,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CreateAuthorInput",
+        "name": "AuthorCreateInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -361,7 +361,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CreateReviewInput",
+        "name": "ReviewCreateInput",
         "description": null,
         "fields": null,
         "inputFields": [
