@@ -56,7 +56,7 @@ describe("book/s", () => {
         }
       }
     `);
-      expect(data.createBook).toBeUndefined();
+      expect(data.createBook).toBeFalsy();
     } catch (error) {
       expect(error.response.data).toBeNull();
       expect(error.response.errors).toEqual(

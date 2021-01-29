@@ -41,7 +41,7 @@ describe("author", () => {
         }
       }
     `);
-      expect(createAuthor).not.toBeDefined();
+      expect(createAuthor).toBeFalsy();
     } catch (error) {
       expect(error.response.data).toBeNull();
       expect(error.response.errors).toEqual(
