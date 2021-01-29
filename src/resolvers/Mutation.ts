@@ -1,5 +1,9 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { AuthenticationError, UserInputError } from "apollo-server-express";
+import {
+  AuthenticationError,
+  ForbiddenError,
+  UserInputError,
+} from "apollo-server-express";
 import { MutationResolvers } from "../generated/graphql";
 import {
   comparePassword,
@@ -68,8 +72,18 @@ const Mutation: MutationResolvers = {
       where: {
         id: bookId,
       },
+      include: {
+        reviews: true,
+      },
     });
     if (!book) throw new UserInputError("Sorry, book doesn't exist.");
+    const reviewExists = book.reviews.find(
+      (review) => review.authorId === user.id
+    );
+
+    if (reviewExists)
+      throw new ForbiddenError("You have already reviewed the book.");
+
     return await prisma.review.create({
       data: {
         text,
