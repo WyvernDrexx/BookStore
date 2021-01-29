@@ -1,8 +1,6 @@
-import { graphqlClient, gql, bearerToken } from "./graphqlClient";
+import { graphqlClient, gql, beforeEachCb } from "./graphqlClient";
 
-beforeEach(() => {
-  graphqlClient.setHeader("Authorization", bearerToken);
-});
+beforeEach(beforeEachCb);
 
 describe("book/s", () => {
   const randomBookName = `_test_book${Math.trunc(Math.random() * 100000)}`;
