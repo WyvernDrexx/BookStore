@@ -9,12 +9,20 @@ type Mutation {
   createAuthor(data: AuthorCreateInput!): Author!
   createBook(data: BookCreateInput!): Book!
   createReview(data: ReviewCreateInput!): Review!
+  updateBook(data: BookUpdateInput!): Book!
 }
 
 input BookCreateInput {
   name: String!
   price: Float!
   totalPages: Int!
+}
+
+input BookUpdateInput{
+  bookId: String!
+  name: String
+  price: Float
+  totalPages: Float
 }
 
 input AuthorCreateInput {

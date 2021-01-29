@@ -23,36 +23,41 @@ async function generateJWT(payload: object): Promise<string> {
   });
 }
 
-type JWTPayload = {
+export type AuthPayload = {
+  token: string | null;
+  isAuthenticated: boolean;
   email: string;
   name: string;
   iat: number;
   exp: number;
-};
-
-export type AuthPayload = {
-  payload: JWTPayload;
-  token: string | null;
-  isAuthenticated: boolean;
+  id: String;
 };
 
 async function getUserData(token: string): Promise<AuthPayload> {
   return new Promise(function (resolve, reject) {
     try {
-      const payload: JWTPayload = jwt.verify(
+      const { email, name, id, exp, iat }: AuthPayload = jwt.verify(
         token,
         process.env.TOKEN_SECRET
-      ) as JWTPayload;
+      ) as AuthPayload;
       resolve({
         token,
         isAuthenticated: true,
-        payload,
+        email,
+        name,
+        id,
+        exp,
+        iat,
       });
     } catch (error) {
       resolve({
         token: null,
         isAuthenticated: false,
-        payload: null,
+        email: null,
+        name: null,
+        iat: null,
+        exp: null,
+        id: null,
       });
     }
   });

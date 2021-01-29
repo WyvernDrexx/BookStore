@@ -35,7 +35,7 @@ const Mutation: MutationResolvers = {
     if (!author) throw new AuthenticationError("Invalid username/password");
     const passwordMatch = await comparePassword(password, author.password);
     if (passwordMatch) {
-      return await generateJWT({ email, name: author.name });
+      return await generateJWT({ email, name: author.name, id: author.id });
     }
     throw new AuthenticationError("Invalid username/password");
   },
@@ -50,7 +50,7 @@ const Mutation: MutationResolvers = {
         totalPages,
         author: {
           connect: {
-            email: user.payload.email,
+            email: user.email,
           },
         },
       },
@@ -76,7 +76,7 @@ const Mutation: MutationResolvers = {
         text,
         author: {
           connect: {
-            email: user.payload.email,
+            email: user.email,
           },
         },
         book: {
