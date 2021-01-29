@@ -92,6 +92,33 @@ const Mutation: MutationResolvers = {
     });
     return review;
   },
+
+  async updateBook(_, { data }, { prisma, user }, __) {
+    const { bookId, name, price, totalPages } = data;
+    if (!user.isAuthenticated)
+      throw new AuthenticationError("Please login to continue.");
+    const book = await prisma.book.findFirst({
+      where: {
+        id: bookId,
+      },
+    });
+    if (!book) throw new UserInputError("Sorry, the book doesn't exist.");
+    if (book.authorId !== user.id)
+      throw new AuthenticationError(
+        "Sorry, you can't perform the following action."
+      );
+    const updatedBook = await prisma.book.update({
+      data: {
+        name,
+        price,
+        totalPages,
+      },
+      where: {
+        id: bookId,
+      },
+    });
+    return updatedBook;
+  },
 };
 
 export default Mutation;
