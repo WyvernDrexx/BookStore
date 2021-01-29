@@ -43,7 +43,7 @@ const Mutation: MutationResolvers = {
     const { name, price, totalPages } = data;
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
-    const book = await prisma.book.create({
+    return await prisma.book.create({
       data: {
         name,
         price,
@@ -59,7 +59,6 @@ const Mutation: MutationResolvers = {
         reviews: true,
       },
     });
-    return book;
   },
   async createReview(_, { data }, { prisma, user }, __) {
     const { text, bookId } = data;
@@ -71,7 +70,7 @@ const Mutation: MutationResolvers = {
       },
     });
     if (!book) throw new UserInputError("Sorry, book doesn't exist.");
-    const review = await prisma.review.create({
+    return await prisma.review.create({
       data: {
         text,
         author: {
@@ -90,7 +89,6 @@ const Mutation: MutationResolvers = {
         book: true,
       },
     });
-    return review;
   },
 
   async updateBook(_, { data }, { prisma, user }, __) {
@@ -107,7 +105,7 @@ const Mutation: MutationResolvers = {
       throw new AuthenticationError(
         "Sorry, you can't perform the following action."
       );
-    const updatedBook = await prisma.book.update({
+    return await prisma.book.update({
       data: {
         name,
         price,
@@ -117,7 +115,6 @@ const Mutation: MutationResolvers = {
         id: bookId,
       },
     });
-    return updatedBook;
   },
 };
 
