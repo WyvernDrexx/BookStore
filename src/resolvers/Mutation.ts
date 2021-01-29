@@ -84,10 +84,6 @@ const Mutation: MutationResolvers = {
           },
         },
       },
-      include: {
-        author: true,
-        book: true,
-      },
     });
   },
 
