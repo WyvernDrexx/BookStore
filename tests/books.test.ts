@@ -1,6 +1,6 @@
-import { graphqlClient, gql, beforeEachCb } from "./graphqlClient";
+import { graphqlClient, gql, setAuthHeader } from "./graphqlClient";
 
-beforeEach(beforeEachCb);
+beforeEach(setAuthHeader);
 
 describe("book/s", () => {
   const randomBookName = `_test_book${Math.trunc(Math.random() * 100000)}`;

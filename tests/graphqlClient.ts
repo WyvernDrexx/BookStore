@@ -7,7 +7,7 @@ const graphqlClient = new GraphQLClient(endpoint);
 
 //email:test@gmail.com PW:123456
 const bearerToken = `Bearer ${process.env.TEST_JWT_TOKEN}`;
-function beforeEachCb() {
+function setAuthHeader() {
   graphqlClient.setHeader("Authorization", bearerToken);
 }
-export { graphqlClient, gql, bearerToken, beforeEachCb };
+export { graphqlClient, gql, bearerToken, setAuthHeader };
