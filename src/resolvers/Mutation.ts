@@ -66,7 +66,11 @@ const Mutation: MutationResolvers = {
     });
   },
   async createReview(_, { data }, { prisma, user }, __) {
-    const { text, bookId } = data;
+    const { text, bookId, rating } = data;
+
+    if (rating < 1 || rating > 5)
+      throw new UserInputError("Ratings must be between 1 and 5.");
+
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
     const book = await prisma.book.findFirst({
@@ -88,6 +92,7 @@ const Mutation: MutationResolvers = {
     return await prisma.review.create({
       data: {
         text,
+        rating,
         author: {
           connect: {
             email: user.email,

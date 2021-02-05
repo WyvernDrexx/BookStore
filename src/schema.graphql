@@ -19,7 +19,7 @@ input BookCreateInput {
   totalPages: Int!
 }
 
-input BookUpdateInput{
+input BookUpdateInput {
   bookId: String!
   name: String
   price: Float
@@ -37,9 +37,10 @@ input LoginInput {
   password: String!
 }
 
-input ReviewCreateInput{
+input ReviewCreateInput {
   text: String!
   bookId: String!
+  rating: Float!
 }
 
 type Book {
@@ -63,6 +64,7 @@ type Author {
 type Review {
   id: ID!
   text: String!
+  rating: Float!
   author: Author!
   book: Book!
   publishedDate: DateTime!

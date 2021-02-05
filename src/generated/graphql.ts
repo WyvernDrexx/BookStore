@@ -85,6 +85,7 @@ export type LoginInput = {
 export type ReviewCreateInput = {
   text: Scalars['String'];
   bookId: Scalars['String'];
+  rating: Scalars['Float'];
 };
 
 export type Book = {
@@ -111,6 +112,7 @@ export type Review = {
   __typename?: 'Review';
   id: Scalars['ID'];
   text: Scalars['String'];
+  rating: Scalars['Float'];
   author: Author;
   book: Book;
   publishedDate: Scalars['DateTime'];
@@ -272,6 +274,7 @@ export type AuthorResolvers<ContextType = MyContextType, ParentType extends Reso
 export type ReviewResolvers<ContextType = MyContextType, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
   book?: Resolver<ResolversTypes['Book'], ParentType, ContextType>;
   publishedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
