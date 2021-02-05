@@ -15,6 +15,7 @@ type Mutation {
 input BookCreateInput {
   name: String!
   price: Float!
+  description: String!
   totalPages: Int!
 }
 
@@ -46,6 +47,7 @@ type Book {
   name: String!
   price: Float!
   author: Author!
+  description: String!
   totalPages: Int!
   publishedDate: DateTime!
   reviews: [Review]!

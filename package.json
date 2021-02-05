@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/cli": "^2.15.0",
-    "@prisma/client": "^2.15.0",
+    "@prisma/client": "^2.16.0",
     "apollo-server-express": "^2.19.2",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",

@@ -15,6 +15,7 @@ model Book {
   name          String
   author        Author   @relation(fields: [authorId], references: [id])
   authorId      String
+  description   String
   totalPages    Int
   publishedDate DateTime @default(now())
   price         Float

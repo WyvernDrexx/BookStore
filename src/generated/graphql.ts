@@ -60,6 +60,7 @@ export type MutationUpdateBookArgs = {
 export type BookCreateInput = {
   name: Scalars['String'];
   price: Scalars['Float'];
+  description: Scalars['String'];
   totalPages: Scalars['Int'];
 };
 
@@ -92,6 +93,7 @@ export type Book = {
   name: Scalars['String'];
   price: Scalars['Float'];
   author: Author;
+  description: Scalars['String'];
   totalPages: Scalars['Int'];
   publishedDate: Scalars['DateTime'];
   reviews: Array<Maybe<Review>>;
@@ -252,6 +254,7 @@ export type BookResolvers<ContextType = MyContextType, ParentType extends Resolv
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   totalPages?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   publishedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   reviews?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
