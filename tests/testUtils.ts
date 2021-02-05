@@ -10,6 +10,7 @@ async function createRandomBook(): Promise<string> {
             name: "${randomBookName}"
             price: 490.90
             totalPages: 44
+            description: "This book was created during testing."
           }
         ) {
           id

@@ -6,13 +6,14 @@ beforeEach(setAuthHeader);
 describe("review/s", () => {
   let BOOK_ID = "";
   test("can be added for a book", async () => {
-     BOOK_ID = await createRandomBook();
+    BOOK_ID = await createRandomBook();
     const { createReview } = await graphqlClient.request(gql`
       mutation {
         createReview(
           data: {
             text: "This is a test review."
             bookId: "${BOOK_ID}"
+            rating: 4.5
           }
         ) {
           id
@@ -36,7 +37,7 @@ describe("review/s", () => {
       const { createReview } = await graphqlClient.request(gql`
         mutation {
           createReview(
-            data: { text: "This is a test review.", bookId: "${BOOK_ID}" }
+            data: { text: "This is a test review.", bookId: "${BOOK_ID}", rating: 4.5 }
           ) {
             id
             text
@@ -69,7 +70,11 @@ describe("review/s", () => {
       const { createReview } = await graphqlClient.request(gql`
         mutation {
           createReview(
-            data: { text: "This is a test review.", bookId: "INVALID_ID" }
+            data: {
+              text: "This is a test review."
+              bookId: "INVALID_ID"
+              rating: 4.5
+            }
           ) {
             id
             text
@@ -100,7 +105,7 @@ describe("review/s", () => {
       const { createReview } = await graphqlClient.request(gql`
         mutation {
           createReview(
-            data: { text: "This is a test review.", bookId: "${BOOK_ID}" }
+            data: { text: "This is a test review.", bookId: "${BOOK_ID}", rating: 4.5 }
           ) {
             id
             text

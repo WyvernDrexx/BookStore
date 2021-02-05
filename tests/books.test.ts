@@ -23,13 +23,12 @@ describe("book/s", () => {
           data: {
             name: "${randomBookName}"
             price: 490.90
-            totalPages: 44
+            totalPages: 44,
+            description:"This is book was created during testing."
           }
         ) {
-          id
           name
           price
-          totalPages
         }
       }
     `);
@@ -46,7 +45,8 @@ describe("book/s", () => {
           data: {
             name: "${randomBookName}"
             price: 490.90
-            totalPages: 44
+            totalPages: 44,
+            description: "This is a test book."
           }
         ) {
           id
