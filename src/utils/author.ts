@@ -1,5 +1,7 @@
+import { UserInputError } from "apollo-server-express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { AuthorCreateInput } from "../generated/graphql";
 
 function generatePasswordHash(password: string) {
   return bcrypt.hash(password, 10);
@@ -63,4 +65,23 @@ async function getUserData(token: string): Promise<AuthPayload> {
   });
 }
 
-export { generatePasswordHash, comparePassword, generateJWT, getUserData };
+function validateAuthorCreateInput(data: AuthorCreateInput) {
+  const { email, name, password } = data;
+
+  if (email.trim().length < 5)
+    throw new UserInputError("Invalid email passed.");
+  if (name.trim().length < 3)
+    throw new UserInputError("Name must be greater than 3 characters.");
+  if (password.trim().length < 7)
+    throw new UserInputError(
+      "Password must be greater than 7 characters, excluding trailing spaces."
+    );
+}
+
+export {
+  generatePasswordHash,
+  comparePassword,
+  generateJWT,
+  getUserData,
+  validateAuthorCreateInput,
+};

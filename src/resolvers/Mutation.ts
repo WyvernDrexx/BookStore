@@ -9,11 +9,15 @@ import {
   comparePassword,
   generatePasswordHash,
   generateJWT,
+  validateAuthorCreateInput,
 } from "../utils/author";
+import { validateBookCreateInput } from "../utils/book";
+import { validateReviewCreateInput } from "../utils/review";
 
 const Mutation: MutationResolvers = {
   async createAuthor(_, { data }, { prisma }, __) {
     const { name, email, password } = data;
+    validateAuthorCreateInput(data);
     try {
       const hashedPassword = await generatePasswordHash(password);
       const author = await prisma.author.create({
@@ -47,6 +51,7 @@ const Mutation: MutationResolvers = {
     const { name, price, totalPages, description } = data;
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
+    validateBookCreateInput(data);
     return await prisma.book.create({
       data: {
         name,
@@ -68,9 +73,6 @@ const Mutation: MutationResolvers = {
   async createReview(_, { data }, { prisma, user }, __) {
     const { text, bookId, rating } = data;
 
-    if (rating < 1 || rating > 5)
-      throw new UserInputError("Ratings must be between 1 and 5.");
-
     if (!user.isAuthenticated)
       throw new AuthenticationError("Please login to continue.");
     const book = await prisma.book.findFirst({
@@ -82,6 +84,7 @@ const Mutation: MutationResolvers = {
       },
     });
     if (!book) throw new UserInputError("Sorry, book doesn't exist.");
+    validateReviewCreateInput(data);
     const reviewExists = book.reviews.find(
       (review) => review.authorId === user.id
     );
