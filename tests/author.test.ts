@@ -12,7 +12,7 @@ describe("author", () => {
         createAuthor(
           data: {
             name: "Test User"
-            password: "123456"
+            password: "12345678"
             email: "${randomTestEmail}"
           }
         ) {
@@ -32,7 +32,7 @@ describe("author", () => {
         createAuthor(
           data: {
             name: "Test User"
-            password: "123456"
+            password: "12345678"
             email: "${randomTestEmail}"
           }
         ) {
